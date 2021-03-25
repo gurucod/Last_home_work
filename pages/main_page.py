@@ -1,7 +1,6 @@
 from .base_page import BasePage
 from .locators import MainPageLocators
 #import time
-#from selenium.webdriver.common.by import By
 
 
 class MainPage(BasePage):
@@ -13,5 +12,5 @@ class MainPage(BasePage):
         #time.sleep(10)
 
     def should_be_login_link(self):
-        # Проверка что присутствует кнопка аторизации/регистрации на странице
+        """Проверка что присутствует кнопка аторизации/регистрации на странице"""
         assert self.is_element_present(*MainPageLocators.LOGIN_LINK), "Login link is not presented"
