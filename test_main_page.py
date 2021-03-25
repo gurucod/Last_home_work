@@ -8,8 +8,3 @@ def test_guest_can_go_to_login_page(browser):
     page.should_be_login_link()
     page.go_to_login_page()
 
-
-def go_to_login_page(browser):
-    login_link = browser.find_element_by_css_selector("#login_link")
-    login_link.click()
-
