@@ -16,4 +16,5 @@ class ProductPageLocators():
     PRICE_BOOK_IN_BASKET = (By.CSS_SELECTOR, "div#messages div:nth-child(3) div.alertinner strong")
     NAME_BOOK_IN_PAGE = (By.CSS_SELECTOR, "div.product_main h1")
     NAME_BOOK_IN_BASKET = (By.CSS_SELECTOR, "div#messages div:nth-child(1) strong")
-    MASSAGE_SUCCESSFUL_ADD = (By.CSS_SELECTOR, "div#messages div:nth-child(1) div.alertinner")
+    SUCCESS_MESSAGE = (By.CSS_SELECTOR, "#messages .alert:nth-child(1)")
+    # div#messages div:nth-child(1) div.alertinner
