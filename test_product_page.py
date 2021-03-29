@@ -22,6 +22,7 @@ class TestUserAddToBasketFromProductPage():
 
     @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
+        """Проверяется что авторизованный пользователь может добавить продукт в корзину"""
         page = ProductPage(browser, promo_link)
         page.open()
         page.should_be_button_basket()
@@ -33,6 +34,8 @@ class TestUserAddToBasketFromProductPage():
         page.should_be_price_basket_equal_book_price()
 
     def test_user_cant_see_success_message(self, browser):
+        """Проверка того что Авторизованный пользователь не видит на странице сообщения об успешном
+        добавлении в корзину """
         page = ProductPage(browser, promo_link)
         page.open()
         page.should_not_be_success_message()
@@ -42,6 +45,7 @@ class TestUserAddToBasketFromProductPage():
 @pytest.mark.parametrize('promo_code', [pytest.param(i, marks=pytest.mark.xfail(i == 7, reason='Забагованный тест'))
                                         for i in range(10)])
 def test_guest_can_add_product_to_basket(browser, promo_code):
+    """Проверяется что гость может добавить продукт в корзину на 10 разных страницах"""
     url = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{promo_code}"
     page = ProductPage(browser, url)
     page.open()
@@ -56,6 +60,7 @@ def test_guest_can_add_product_to_basket(browser, promo_code):
 
 @pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    """Проверка того что гость не видит добавленные продукты в корзину при переходе со страницы товара"""
     page = ProductPage(browser, link_product)
     page.open()
     page.go_to_basket_page()
@@ -66,7 +71,7 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
 
 @pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
-    """Гость может перейти на страницу авторизации из страницы продукта"""
+    """Гость может перейти на страницу авторизации со страницы продукта"""
     page = ProductPage(browser, link_product)
     page.open()
     page.go_to_login_page()
