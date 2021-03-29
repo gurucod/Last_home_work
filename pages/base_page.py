@@ -3,7 +3,7 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from .locators import BasePageLocators
+from .locators import BasePageLocators, MainPageLocators
 import math
 
 
@@ -20,11 +20,17 @@ class BasePage():
         self.browser.get(self.url)
 
     def go_to_login_page(self):
+        """Переходим на страницу Авторизации/Регистрации"""
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
 
     def should_be_login_page(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def go_to_basket_page(self):
+        """Нажимает на кнопку 'Корзина' и переходим в корзину """
+        link = self.browser.find_element(*MainPageLocators.BASKET_BUTTON)
+        link.click()
 
     def is_element_present(self, how, what):
         """Метод BasePage. Метод is_element_present, в котором перехватываются исключения.
