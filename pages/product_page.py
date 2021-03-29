@@ -7,8 +7,8 @@ class ProductPage(BasePage):
         """Тут вызываются методы проверки пристутсвия элементов на странице"""
         self.should_be_login_url()
         self.should_be_button_basket()
-        self.should_be_book_name_equael()
-        self.should_be_price_basket_equale_book_price()
+        self.should_be_book_name_equal()
+        self.should_be_price_basket_equal_book_price()
 
     def add_to_basket(self):
         """Нажатие на кнопку Добавление в корзину"""
@@ -24,13 +24,13 @@ class ProductPage(BasePage):
         assert self.is_element_present(*ProductPageLocators.BUTTON_ADD_TO_BASKET), "Кнопка добавления в " \
                                                                                    "корзину не найдена на странице"
 
-    def should_be_price_basket_equale_book_price(self):
+    def should_be_price_basket_equal_book_price(self):
         """Проверяется что стоимость корзины совпадает с ценой товара."""
         book_price = self.browser.find_element(*ProductPageLocators.PRICE_BOOK_IN_PAGE).text
         book_price_basket = self.browser.find_element(*ProductPageLocators.PRICE_BOOK_IN_BASKET).text
         assert book_price == book_price_basket, "Цена корзины не совпала с ценой товара"
 
-    def should_be_book_name_equael(self):
+    def should_be_book_name_equal(self):
         """Проверка того что название товара в сообщении совпадает с тем товаром, который был действительно добавлен."""
         book_name = self.browser.find_element(*ProductPageLocators.NAME_BOOK_IN_PAGE).text
         book_name_in_basket = self.browser.find_element(*ProductPageLocators.NAME_BOOK_IN_BASKET).text
