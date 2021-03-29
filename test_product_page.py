@@ -20,6 +20,7 @@ class TestUserAddToBasketFromProductPage():
         login_page.register_new_user(email, password)
         login_page.should_be_authorized_user()
 
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         page = ProductPage(browser, promo_link)
         page.open()
@@ -37,8 +38,8 @@ class TestUserAddToBasketFromProductPage():
         page.should_not_be_success_message()
 
 
-@pytest.mark.skip
-@pytest.mark.parametrize('promo_code', [pytest.param(i, marks=pytest.mark.xfail(i==7, reason='Забагованный тест'))
+@pytest.mark.need_review
+@pytest.mark.parametrize('promo_code', [pytest.param(i, marks=pytest.mark.xfail(i == 7, reason='Забагованный тест'))
                                         for i in range(10)])
 def test_guest_can_add_product_to_basket(browser, promo_code):
     url = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{promo_code}"
@@ -46,9 +47,14 @@ def test_guest_can_add_product_to_basket(browser, promo_code):
     page.open()
     page.should_be_product_page()
     page.add_to_basket()
+    time.sleep(1)
     page.solve_quiz_and_get_code()
+    time.sleep(1)
+    page.should_be_book_name_equal()
+    page.should_be_price_basket_equal_book_price()
 
 
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     page = ProductPage(browser, link_product)
     page.open()
@@ -58,6 +64,7 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     basket_page.should_be_message_basket_empty()
 
 
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
     """Гость может перейти на страницу авторизации из страницы продукта"""
     page = ProductPage(browser, link_product)

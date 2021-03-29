@@ -7,8 +7,6 @@ class ProductPage(BasePage):
         """Тут вызываются методы проверки пристутсвия элементов на странице"""
         self.should_be_login_url()
         self.should_be_button_basket()
-        self.should_be_book_name_equal()
-        self.should_be_price_basket_equal_book_price()
 
     def add_to_basket(self):
         """Нажатие на кнопку Добавление в корзину"""
